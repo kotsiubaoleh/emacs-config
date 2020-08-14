@@ -37,6 +37,7 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (electric-pair-mode 1)
 (run-with-idle-timer 0.1 nil 'toggle-frame-maximized)
+(setq-default cursor-type 'bar)
 
 ;;Helm
 (straight-use-package 'helm)
