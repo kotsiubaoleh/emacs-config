@@ -1,22 +1,3 @@
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(all-the-icons-scale-factor 1)
- '(ansi-color-names-vector
-   ["#232530" "#99324b" "#4f894c" "#9a7500" "#3b6ea8" "#97365b" "#398eac" "#2a2a2a"])
- '(pdf-view-midnight-colors (cons "#2a2a2a" "#fafafa")))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-comment-face ((t (:inherit italic :foreground "dim gray"))))
- '(helm-selection ((t (:inherit bold :background "purple4"))))
- '(line-number ((t (:inherit default :foreground "dim gray" :strike-through nil :underline nil :slant normal :weight normal))))
- '(line-number-current-line ((t (:inherit (hl-line default) :foreground "dark gray" :strike-through nil :underline nil :slant normal :weight normal)))))
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -34,13 +15,17 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
+(global-hl-line-mode 1)
+(blink-cursor-mode 1)
+
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (electric-pair-mode 1)
-(run-with-idle-timer 0.1 nil 'toggle-frame-maximized)
-(setq-default cursor-type 'bar)
+;;(run-with-idle-timer 0.1 nil 'toggle-frame-maximized) ;;fullscreen mode on startup
+(setq-default cursor-type 'box)
 
 ;;Helm
 (straight-use-package 'helm)
+(straight-use-package 'helm-ag)
 (require 'helm-config)
 
 ;;Projectile
@@ -67,8 +52,8 @@
             (set-face-background 'mmm-default-submode-face nil)))
 
 ;;Theme
-(straight-use-package 'doom-themes)
-(load-theme 'doom-horizon t)
+(straight-use-package 'dracula-theme)
+(load-theme 'dracula t)
 
 ;;Solaire
 (straight-use-package 'solaire-mode)
@@ -100,5 +85,20 @@
 ;;highlight-indent-guides
 (straight-use-package 'highlight-indent-guides)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-(setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-method 'bitmap)
 (setq highlight-indent-guides-auto-character-face-perc 20)
+
+;;all-the-icons
+(straight-use-package 'all-the-icons)
+;;(all-the-icons-install-fonts)
+
+;;doom modeline
+(straight-use-package 'doom-modeline)
+(doom-modeline-mode 1)
+
+;;turn off backup files
+(setq make-backup-files nil)
+
+;;SFCC
+(add-to-list 'auto-mode-alist '("\\.isml\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.hbs\\'" . html-mode))
